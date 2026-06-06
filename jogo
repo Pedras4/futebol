@@ -1,0 +1,105 @@
+import random
+
+meu_time = ["Breel Embolo", "Danny Namaso", "Viktor Gyokeres"]
+adversario = ["Aaron Cresswell", "Moussa Barrow", "James Ward-Prowse"]
+
+posse = "meu"
+jogador = "Breel Embolo"
+
+golos_meu = 0
+golos_adv = 0
+
+turnos = 50
+
+for turno in range(turnos):
+    print("\n" + "=" * 40)
+    print(f"Turno {turno + 1}/{turnos}")
+    print(f"Resultado: Tu {golos_meu} - {golos_adv} Adversário")
+    print(f"Bola com: {jogador}")
+
+    if posse == "meu":
+        print("\nO que queres fazer?")
+        print("1 - Driblar")
+        print("2 - Passar")
+        print("3 - Chutar")
+
+        escolha = input("> ")
+
+        if escolha == "1":  # Driblar
+            if random.random() < 0.5:
+                print(f"{jogador} driblou e avançou para o ataque!")
+            else:
+                ladrao = random.choice(adversario)
+                print(f"{jogador} perdeu a bola para {ladrao}!")
+                jogador = ladrao
+                posse = "adversario"
+
+        elif escolha == "2":  # Passar
+            if random.random() < 0.5:
+                novo = random.choice(meu_time)
+                while novo == jogador:
+                    novo = random.choice(meu_time)
+
+                print(f"{jogador} passou para {novo}!")
+                jogador = novo
+            else:
+                ladrao = random.choice(adversario)
+                print(f"Passe errado! {ladrao} roubou a bola!")
+                jogador = ladrao
+                posse = "adversario"
+
+        elif escolha == "3":  # Chutar
+            if random.random() < 0.2:
+                print(f"GOLOOOOO! {jogador} marcou!")
+                golos_meu += 1
+                jogador = random.choice(adversario)
+                posse = "adversario"
+            else:
+                guarda = random.choice(adversario)
+                print(f"Remate defendido! {guarda} ficou com a bola.")
+                jogador = guarda
+                posse = "adversario"
+
+    else:
+        acao = random.choice(["driblar", "passar", "chutar"])
+
+        print(f"\n{jogador} decide {acao}.")
+
+        if acao == "driblar":
+            if random.random() < 0.5:
+                print(f"{jogador} driblou com sucesso!")
+            else:
+                ladrao = random.choice(meu_time)
+                print(f"{ladrao} roubou a bola!")
+                jogador = ladrao
+                posse = "meu"
+
+        elif acao == "passar":
+            if random.random() < 0.5:
+                novo = random.choice(adversario)
+                while novo == jogador:
+                    novo = random.choice(adversario)
+
+                print(f"{jogador} passou para {novo}.")
+                jogador = novo
+            else:
+                ladrao = random.choice(meu_time)
+                print(f"Passe falhado! {ladrao} recuperou a bola!")
+                jogador = ladrao
+                posse = "meu"
+
+        elif acao == "chutar":
+            if random.random() < 0.2:
+                print(f"GOLO do adversário! Marcado por {jogador}!")
+                golos_adv += 1
+                jogador = random.choice(meu_time)
+                posse = "meu"
+            else:
+                guarda = random.choice(meu_time)
+                print(f"{guarda} recuperou a bola!")
+                jogador = guarda
+                posse = "meu"
+
+print("\n" + "=" * 40)
+print("FIM DO JOGO")
+print(f"Resultado final: Tu {golos_meu} - {golos_adv} Adversário")
