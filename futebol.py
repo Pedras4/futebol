@@ -23,10 +23,10 @@ equipa = {
 
 MAX_ACOES = 40 #limite de ações do jogo para 40
 
-janela = tk.Tk() #cria a janela
-janela.title("Futebol")
-janela.geometry("1280x720")
-janela.resizable(False, False)
+janela = tk.Tk() #cria a janela do jogo
+janela.title("Futebol") #nome da janela
+janela.geometry("1280x720") #proporção da janela
+janela.resizable(False, False) #não da para mudar a proporção da janela
 
 golos = {"verde": 0, "roxo": 0} #guarda o resultado do jogo
 acao = 0 #guarda o numero de ações realzadas
@@ -37,7 +37,7 @@ jogador = random.choice(list(equipa[equipa_atual].keys())) #escolhe um jogador a
 img_ref = None #guardar a referência da imagem para evitar que seja eliminada pelo garbage collector
 
 resultado = tk.Label(janela, font=("Arial", 24, "bold")) #mostra o resultado do jogo
-resultado.pack(fill="x") #mostra a label e limita a largura da label
+resultado.pack(fill="x") #
 
 acoes = tk.Label(janela, font=("Arial", 16)) #mostra o número de ações realizadas
 acoes.pack(pady=10) #cria um espaço entre o resultado e a imagem do jogador
